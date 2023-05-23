@@ -1,0 +1,19 @@
+.terminal {
+    
+}
+
+@keyframes alternating-colors {
+	0% {
+        background-color: black;
+	}
+
+	50% {
+		background-color: white;
+	}
+}
+
+.cursor {
+    background-color: black;
+    animation: alternating-colors 2s steps(1, jump-end) infinite;
+
+}
