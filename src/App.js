@@ -37,13 +37,18 @@ function App() {
     await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST', 
       headers: {
-        'Authorization': 'Bearer ' + process.env.API_KEY,
+        'Authorization': 'Bearer ' + process.env.REACT_APP_API_KEY,
         'Content-Type': 'application/json' 
       },
       body: JSON.stringify(apiRequestBody)
     }).then((data) => {
       return data.json();
     }).then((data) => {
+      if(data.hasOwnProperty('error')){
+        setTerminalReset(true);
+        setTerminal("There was an error with ChatGPT\n Please refresh this page");
+        return;
+      }
       let text = data.choices[0].message.content.split('').filter((el) => {
           if(el === '\n') return false
           else return true
